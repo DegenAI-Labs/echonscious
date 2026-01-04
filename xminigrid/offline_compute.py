@@ -288,7 +288,7 @@ def main():
     parser.add_argument(
         "--llm-backend",
         type=str,
-        default="default",
+        default="oai",
         choices=["default", "oai"],
         help="Which LLM backend to use: 'default' or 'azure'",
     )
@@ -308,9 +308,9 @@ def main():
         trial_data = json.load(f)
 
     if args.llm_backend == "default":
-        llm_func = get_response_from_gpt
-    elif args.llm_backend == "oai":
         llm_func = get_response_from_gpt_azure
+    elif args.llm_backend == "oai":
+        llm_func = get_response_from_gpt
     else:
         raise ValueError(f"Unknown LLM backend: {args.llm_backend}")
 

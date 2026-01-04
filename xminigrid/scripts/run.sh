@@ -9,10 +9,10 @@ benchmark=$3
 for env_id in $(seq 6 16); do
 
     # seed advances the iteration
-    for seed in $(seq 0 16); do
+    for seed in $(seq 0 1); do
         python run.py --seed $seed --num-trials 1  --benchmark-id $benchmark --agent-type react --hindsight-type $agent --save-dir results/$benchmark/$model/$agent/$seed --model $model --ruleset-id $env_id
 
-        python offline_compute.py --run-dir results/$benchmark/$model/$agent/ --trial-file results_${seed}.json --model $agent
+        python offline_compute.py --run-dir results/$benchmark/$model/$agent/$seed --trial-file results_${seed}.json --mode $agent
     done
 done
 

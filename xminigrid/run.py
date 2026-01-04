@@ -419,8 +419,8 @@ def main():
     parser.add_argument(
         "--llm-backend",
         type=str,
-        default="substrate",
-        choices=["default", "vllm"],
+        default="oai",
+        choices=["default", "oai", "vllm"],
         help="Which LLM backend to use: 'default', 'oai', or 'substrate'",
     )
     parser.add_argument(
@@ -500,6 +500,11 @@ def main():
         from api_call import get_response_from_gpt_azure
 
         llm_func = get_response_from_gpt_azure
+    elif args.llm_backend == "oai":
+        from api_call import get_response_from_gpt
+
+        llm_func = get_response_from_gpt
+
     elif args.llm_backend == "vllm":
         from api_call import get_response_from_local
 
